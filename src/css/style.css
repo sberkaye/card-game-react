@@ -1,0 +1,47 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  color: #333;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 6rem;
+  margin: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  line-height: 1.4;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  width: 60%;
+  top: 20%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+/*# sourceMappingURL=style.css.map */
