@@ -1,7 +1,7 @@
 import React from "react";
-
 // import usePics from "../hooks/usePics";
 import ThemeSlider from "./ThemeSlider";
+import StartButton from "./StartButton";
 
 const App = () => {
   return (
@@ -15,6 +15,7 @@ const App = () => {
         find it after the cards are shuffled
       </h2>
       <ThemeSlider />
+      <StartButton />
     </>
   );
 };

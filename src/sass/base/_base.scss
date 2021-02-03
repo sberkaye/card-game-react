@@ -15,4 +15,6 @@ body {
   box-sizing: border-box;
   color: $default-font-color;
   background-color: $blue-darker;
+  display: flex;
+  flex-direction: column;
 }
