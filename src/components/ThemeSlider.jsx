@@ -13,32 +13,31 @@ const ThemeSlider = (props) => {
   const { themes } = props;
 
   useEffect(() => {
+    // need to use this here, because the setter returned
+    // by the useState hook is asynchronous and doesn't update
+    // the state immediately. So, my solution is to update the theme
+    // with each re-render.
     props.selectTheme(themes[currIndex]);
-    console.log("currIndex: ", currIndex);
-  }, []);
+  });
 
   const prevIndex = () => {
+    // if the current index is the first index
+    // go to the last index
     if (!currIndex) {
       setCurrIndex(themes.length - 1);
-      console.log("currIndex: ", currIndex);
       return;
     }
     setCurrIndex(currIndex - 1);
-    // console.log("currIndex: ", currIndex);
-    props.selectTheme(themes[currIndex]);
-    console.log("selected theme: ", themes[currIndex]);
   };
 
   const nextIndex = () => {
+    // if the current index is the last index
+    // go back to the first index
     if (currIndex === themes.length - 1) {
       setCurrIndex(0);
-      console.log("currIndex: ", currIndex);
       return;
     }
     setCurrIndex(currIndex + 1);
-    // console.log("currIndex: ", currIndex);
-    props.selectTheme(themes[currIndex]);
-    console.log("selected theme: ", themes[currIndex]);
   };
 
   return (
