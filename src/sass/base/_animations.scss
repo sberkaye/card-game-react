@@ -1,16 +1,23 @@
 @keyframes moveOutRight {
   0% {
     opacity: 1;
-    transform: translate();
+    transform: translate(0);
   }
 
-  50% {
-    opacity: 0.5;
-    transform: translateX(10rem);
-  }
+  // 50% {
+  //   opacity: 0.5;
+  //   transform: translateX(50rem);
+  // }
 
   100% {
     opacity: 0;
     transform: translateX(100rem);
+  }
+}
+
+@keyframes hideScrollbar {
+  from,
+  to {
+    overflow-x: hidden;
   }
 }

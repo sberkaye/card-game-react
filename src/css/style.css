@@ -1,15 +1,16 @@
 @keyframes moveOutRight {
   0% {
     opacity: 1;
-    transform: translate();
-  }
-  50% {
-    opacity: 0.5;
-    transform: translateX(10rem);
+    transform: translate(0);
   }
   100% {
     opacity: 0;
     transform: translateX(100rem);
+  }
+}
+@keyframes hideScrollbar {
+  from, to {
+    overflow-x: hidden;
   }
 }
 *,
@@ -30,6 +31,7 @@ body {
   background-color: #24305e;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 body {
@@ -136,6 +138,16 @@ h2 {
   font-size: 3rem;
   text-align: center;
   color: #f8e9a1;
+}
+
+.section-main {
+  animation: moveOutRight 1s forwards;
+  animation-play-state: paused;
+  backface-visibility: hidden;
+}
+
+.animated {
+  animation-play-state: running;
 }
 
 /*# sourceMappingURL=style.css.map */

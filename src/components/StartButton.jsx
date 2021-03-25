@@ -1,13 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import picsActions from "../redux/actions/actionPics";
 
-const { getPics } = picsActions;
-
-const StartButton = (props) => {
+const StartButton = ({ setAnimated }) => {
   const handleClick = () => {
-    props.getPics();
+    setAnimated(true);
   };
 
   return (
@@ -19,14 +15,8 @@ const StartButton = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     selectedTheme: state.theme.selectedTheme,
-//   };
-// };
-
 StartButton.propTypes = {
-  getPics: PropTypes.func.isRequired,
+  setAnimated: PropTypes.func.isRequired,
 };
 
-export default connect(null, { getPics })(StartButton);
+export default StartButton;

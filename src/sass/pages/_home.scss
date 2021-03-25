@@ -1,0 +1,9 @@
+.section-main {
+  animation: moveOutRight 1s forwards;
+  animation-play-state: paused;
+  backface-visibility: hidden;
+}
+
+.animated {
+  animation-play-state: running;
+}
