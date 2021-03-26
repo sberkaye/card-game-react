@@ -1,7 +1,7 @@
 import { SET_THEME } from "../actions/types";
 
 const INITIAL_STATE = {
-  themes: ["animals", "flowers", "cars"],
+  themes: ["animals", "flowers", "cars", "sports"],
   selectedTheme: "",
 };
 
