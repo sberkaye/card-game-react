@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const Card = (props) => {
+const Card = ({ size }) => {
   return (
-    <div className={`card card-${props.size}`}>
+    <div className={`card card-${size}`}>
       <div className="card__side card__side--front">SA</div>
       <div className="card__side card__side--back">AS</div>
     </div>

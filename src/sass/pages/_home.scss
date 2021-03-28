@@ -1,9 +1,28 @@
 .section-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 90vh;
   animation: moveOutRight 1s forwards;
   animation-play-state: paused;
   backface-visibility: hidden;
+  position: relative;
 }
 
 .animated {
   animation-play-state: running;
+}
+
+.section-text {
+}
+
+.section-cards {
+  display: none;
+}
+
+.section-settings {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
 }

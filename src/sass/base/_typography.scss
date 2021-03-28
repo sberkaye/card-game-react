@@ -7,7 +7,6 @@ body {
 h1 {
   font-weight: 700;
   font-size: 6rem;
-  margin: 3rem;
   text-align: center;
   color: $blue-light;
   text-transform: uppercase;
@@ -18,14 +17,8 @@ h2 {
   letter-spacing: 0.2rem;
   line-height: 1.4;
   font-size: 2rem;
+  margin-top: 2rem;
   text-align: center;
-  margin-bottom: 3rem;
-  margin-top: 3rem;
   text-transform: uppercase;
   color: $red-light;
-  width: 60%;
-  top: 20%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
 }

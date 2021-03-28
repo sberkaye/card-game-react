@@ -42,24 +42,26 @@ const ThemeSlider = (props) => {
 
   return (
     <>
-      <span className="span-theme">Select a theme:</span>
-      <div className="theme-carousel">
-        <button
-          className="theme-carousel__button theme-carousel__button--left"
-          type="button"
-          onClick={prevIndex}
-        >
-          &#10148;
-        </button>
-        <div className="theme-carousel__content">{themes[currIndex]}</div>
-        <button
-          href="#"
-          className="theme-carousel__button theme-carousel__button--right"
-          type="button"
-          onClick={nextIndex}
-        >
-          &#10148;
-        </button>
+      <div className="theme-slider">
+        <span className="theme-slider__text">Select a theme:</span>
+        <div className="theme-carousel">
+          <button
+            className="theme-carousel__button theme-carousel__button--left"
+            type="button"
+            onClick={prevIndex}
+          >
+            &#10148;
+          </button>
+          <div className="theme-carousel__content">{themes[currIndex]}</div>
+          <button
+            href="#"
+            className="theme-carousel__button theme-carousel__button--right"
+            type="button"
+            onClick={nextIndex}
+          >
+            &#10148;
+          </button>
+        </div>
       </div>
     </>
   );

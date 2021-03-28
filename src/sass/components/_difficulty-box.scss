@@ -1,0 +1,30 @@
+.difficulty {
+  display: inline-block;
+  text-align: center;
+  font-size: 3rem;
+  height: 100%;
+  &__box {
+    margin: 2rem;
+
+    &--level {
+      display: inline-block;
+      transition: all 0.4s;
+      border: 0.2rem solid $blue-light;
+      color: $default-font-color;
+      background-color: transparent;
+      font-size: 3rem;
+      border-radius: 10%;
+      margin-top: 1rem;
+
+      &:not(:last-child) {
+        margin-right: 3rem;
+      }
+
+      &:hover {
+        background-color: $blue-light;
+        color: $blue-dark;
+        cursor: pointer;
+      }
+    }
+  }
+}

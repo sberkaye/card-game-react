@@ -1,49 +1,56 @@
-.theme-carousel {
-  display: flex;
-  width: 40%;
-  z-index: 0;
-  justify-content: center;
-  margin: 3% auto;
-  align-items: center;
-
-  &__button {
-    font-weight: 700;
-    border: 0;
-    font-size: 6rem;
-    display: inline-block;
-    padding: 0;
-    vertical-align: middle;
-    color: $blue-light;
-    background-color: $blue-darker;
-    transition: all 0.2s;
-
-    &:hover,
-    &:active {
-      color: $gray;
-      border: 0;
-    }
-
-    &--left {
-      transform: rotateY(180deg);
-    }
-  }
-
-  &__content {
-    display: inline-block;
-    font-size: 6rem;
-    font-weight: 300;
-    text-transform: capitalize;
-    margin: 1rem;
-    text-align: center;
-    width: 55%;
-    color: $yellow;
-  }
-}
-
-.span-theme {
-  display: block;
-  margin-top: 25vh;
-  font-size: 3rem;
+.theme-slider {
+  display: inline-block;
   text-align: center;
-  color: $yellow;
+  &__text {
+    font-size: 3rem;
+  }
+
+  .theme-carousel {
+    display: flex;
+    z-index: 0;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &__button {
+      font-weight: 700;
+      border: 0;
+      font-size: 6rem;
+      display: inline-block;
+      padding: 0;
+      vertical-align: middle;
+      color: $blue-light;
+      background-color: $blue-darker;
+      transition: all 0.2s;
+
+      &:hover,
+      &:active {
+        color: $gray;
+        border: 0;
+      }
+
+      &--left {
+        transform: rotateY(180deg);
+      }
+    }
+
+    &__content {
+      display: inline-block;
+      font-size: 6rem;
+      font-weight: 300;
+      text-transform: capitalize;
+      margin: 0 4rem 0 4rem;
+      text-align: center;
+      width: 55%;
+      color: $yellow;
+    }
+
+    &__span {
+      font-size: 3rem;
+      text-align: center;
+      flex-grow: 1;
+      color: $yellow;
+    }
+  }
 }
