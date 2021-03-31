@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import usePics from "../hooks/usePics";
 import ThemeSlider from "./ThemeSlider";
 import StartButton from "./StartButton";
@@ -7,10 +7,6 @@ import DifficultyBox from "./DifficultyBox";
 
 const App = () => {
   const [animated, setAnimated] = useState(false);
-
-  useEffect(() => {
-    console.log(`animated: ${animated}`);
-  });
 
   return (
     <div className={`section-main ${animated ? `animated` : ``}`}>

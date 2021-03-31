@@ -16,6 +16,7 @@
     letter-spacing: 0.15rem;
     box-shadow: 0.5rem 0.5rem 0.2rem darken($blue-darker, 10%);
     transition: all 0.2s;
+    outline: none;
 
     &:hover {
       transform: scale(1.3);

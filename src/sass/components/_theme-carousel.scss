@@ -3,6 +3,7 @@
   text-align: center;
   &__text {
     font-size: 3rem;
+    display: block;
   }
 
   .theme-carousel {
@@ -11,7 +12,6 @@
     padding: 1rem;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
 
     &__button {
       font-weight: 700;
@@ -19,10 +19,12 @@
       font-size: 6rem;
       display: inline-block;
       padding: 0;
+      margin: 0 2rem;
       vertical-align: middle;
       color: $blue-light;
       background-color: $blue-darker;
       transition: all 0.2s;
+      outline: none;
 
       &:hover,
       &:active {
@@ -40,9 +42,8 @@
       font-size: 6rem;
       font-weight: 300;
       text-transform: capitalize;
-      margin: 0 4rem 0 4rem;
       text-align: center;
-      width: 55%;
+      width: 25rem;
       color: $yellow;
     }
 

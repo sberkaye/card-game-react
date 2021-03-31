@@ -81,6 +81,7 @@ h2 {
   letter-spacing: 0.15rem;
   box-shadow: 0.5rem 0.5rem 0.2rem #161d39;
   transition: all 0.2s;
+  outline: none;
 }
 #start-button__button:hover {
   transform: scale(1.3);
@@ -138,6 +139,8 @@ h2 {
   font-size: 3rem;
   border-radius: 10%;
   margin-top: 1rem;
+  padding: 1rem;
+  outline: none;
 }
 .difficulty__box--level:not(:last-child) {
   margin-right: 3rem;
@@ -148,12 +151,29 @@ h2 {
   cursor: pointer;
 }
 
+.active {
+  display: inline-block;
+  transition: all 0.4s;
+  border: 0.2rem solid #a8d0e6;
+  color: #374785;
+  background-color: #a8d0e6;
+  font-size: 3rem;
+  border-radius: 10%;
+  margin-top: 1rem;
+  padding: 1rem;
+  outline: none;
+}
+.active:not(:last-child) {
+  margin-right: 3rem;
+}
+
 .theme-slider {
   display: inline-block;
   text-align: center;
 }
 .theme-slider__text {
   font-size: 3rem;
+  display: block;
 }
 .theme-slider .theme-carousel {
   display: flex;
@@ -161,7 +181,6 @@ h2 {
   padding: 1rem;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 .theme-slider .theme-carousel__button {
   font-weight: 700;
@@ -169,10 +188,12 @@ h2 {
   font-size: 6rem;
   display: inline-block;
   padding: 0;
+  margin: 0 2rem;
   vertical-align: middle;
   color: #a8d0e6;
   background-color: #24305e;
   transition: all 0.2s;
+  outline: none;
 }
 .theme-slider .theme-carousel__button:hover, .theme-slider .theme-carousel__button:active {
   color: #474b4f;
@@ -186,9 +207,8 @@ h2 {
   font-size: 6rem;
   font-weight: 300;
   text-transform: capitalize;
-  margin: 0 4rem 0 4rem;
   text-align: center;
-  width: 55%;
+  width: 25rem;
   color: #f8e9a1;
 }
 .theme-slider .theme-carousel__span {
