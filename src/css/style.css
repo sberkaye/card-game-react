@@ -130,7 +130,7 @@ h2 {
 .difficulty__box {
   margin: 2rem;
 }
-.difficulty__box--level {
+.difficulty__box__level {
   display: inline-block;
   transition: all 0.4s;
   border: 0.2rem solid #a8d0e6;
@@ -142,13 +142,17 @@ h2 {
   padding: 1rem;
   outline: none;
 }
-.difficulty__box--level:not(:last-child) {
+.difficulty__box__level:not(:last-child) {
   margin-right: 3rem;
 }
-.difficulty__box--level:hover {
+.difficulty__box__level:hover {
   background-color: #a8d0e6;
   color: #374785;
   cursor: pointer;
+}
+.difficulty__box__level--active {
+  background-color: #a8d0e6;
+  color: #374785;
 }
 
 .active {

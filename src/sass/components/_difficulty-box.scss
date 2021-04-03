@@ -6,7 +6,7 @@
   &__box {
     margin: 2rem;
 
-    &--level {
+    &__level {
       display: inline-block;
       transition: all 0.4s;
       border: 0.2rem solid $blue-light;
@@ -26,6 +26,11 @@
         background-color: $blue-light;
         color: $blue-dark;
         cursor: pointer;
+      }
+
+      &--active {
+        background-color: $blue-light;
+        color: $blue-dark;
       }
     }
   }

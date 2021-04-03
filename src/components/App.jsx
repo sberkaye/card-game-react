@@ -7,6 +7,7 @@ import DifficultyBox from "./DifficultyBox";
 
 const App = () => {
   const [animated, setAnimated] = useState(false);
+  const [difficulty, setDifficulty] = useState(1);
 
   return (
     <div className={`section-main ${animated ? `animated` : ``}`}>
@@ -16,15 +17,18 @@ const App = () => {
       <div className="section-text">
         <h1>Find the correct card</h1>
         <h2>
-          See the cards,
+          See the cards
           <br />
-          memorize the different one,
+          memorize the different one
           <br />
           find it after the cards are shuffled
         </h2>
       </div>
       <div className="section-settings">
-        <DifficultyBox />
+        <DifficultyBox
+          difficulty={difficulty}
+          changeDifficulty={setDifficulty}
+        />
         <ThemeSlider />
       </div>
       <StartButton setAnimated={setAnimated} />

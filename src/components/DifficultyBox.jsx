@@ -1,74 +1,33 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 
-import difficultyActions from "../redux/actions/actionDifficulty";
-
-const { setDifficulty } = difficultyActions;
-
-const DifficultyBox = (props) => {
-  const { difficulty } = props;
-
+const DifficultyBox = ({ difficulty, changeDifficulty }) => {
   const handleClick = (e) => {
-    props.setDifficulty(e.target.value);
-    console.log("e.target.value :>> ", e.target.value);
+    changeDifficulty(e.target.value);
   };
 
-  useEffect(() => {
-    console.log("difficulty :>> ", difficulty);
-  }, [difficulty]);
+  // need to use array mapping while rendering buttons
+  // to make all of them update their classnames with
+  // each re-render
+  const buttons = ["1", "2", "3", "4"];
 
   return (
     <div className="difficulty">
-      {console.log("difficulty in render: ", difficulty)}
       <p>Select difficulty level:</p>
-      <span>{difficulty}</span>
       <div className="difficulty__box">
-        <button
-          type="button"
-          value={1}
-          onClick={handleClick}
-          className={clsx(
-            "difficulty__box--level",
-            difficulty === 1 && "active"
-          )}
-        >
-          1
-        </button>
-        <button
-          type="button"
-          value={2}
-          onClick={handleClick}
-          className={clsx(
-            "difficulty__box--level",
-            difficulty === 2 && "active"
-          )}
-        >
-          2
-        </button>
-        <button
-          type="button"
-          value={3}
-          onClick={handleClick}
-          className={clsx(
-            "difficulty__box--level",
-            difficulty === 3 && "active"
-          )}
-        >
-          3
-        </button>
-        <button
-          type="button"
-          value={4}
-          onClick={handleClick}
-          className={clsx(
-            "difficulty__box--level",
-            difficulty === 4 && "active"
-          )}
-        >
-          4
-        </button>
+        {buttons.map((btn) => (
+          <button
+            key={btn}
+            onClick={handleClick}
+            value={btn}
+            type="button"
+            className={`difficulty__box__level ${
+              `${difficulty}` === btn ? `difficulty__box__level--active` : ``
+            }`}
+          >
+            {btn}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -76,13 +35,7 @@ const DifficultyBox = (props) => {
 
 DifficultyBox.propTypes = {
   difficulty: PropTypes.number.isRequired,
-  setDifficulty: PropTypes.func.isRequired,
+  changeDifficulty: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    difficulty: state.difficulty.value,
-  };
-};
-
-export default connect(mapStateToProps, { setDifficulty })(DifficultyBox);
+export default DifficultyBox;
