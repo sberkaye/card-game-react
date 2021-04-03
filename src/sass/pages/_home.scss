@@ -14,11 +14,12 @@
   animation-play-state: running;
 }
 
-.section-text {
-}
-
 .section-cards {
   display: none;
+
+  &--play {
+    display: block;
+  }
 }
 
 .section-settings {

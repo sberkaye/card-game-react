@@ -94,8 +94,9 @@ h2 {
 }
 
 .card {
-  perspective: 2000rem;
+  perspective: 1000rem;
   height: 20rem;
+  width: 20rem;
   position: relative;
 }
 .card__side {
@@ -239,6 +240,9 @@ h2 {
 
 .section-cards {
   display: none;
+}
+.section-cards--play {
+  display: block;
 }
 
 .section-settings {

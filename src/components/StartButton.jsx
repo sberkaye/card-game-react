@@ -6,9 +6,12 @@ import picsActions from "../redux/actions/actionPics";
 const { getPics } = picsActions;
 
 const StartButton = (props) => {
+  const { difficulty } = props;
+
   const handleClick = () => {
     props.setAnimated(true);
     props.getPics();
+    console.log("difficulty :>> ", difficulty);
   };
 
   return (
@@ -21,6 +24,7 @@ const StartButton = (props) => {
 };
 
 StartButton.propTypes = {
+  difficulty: PropTypes.number.isRequired,
   setAnimated: PropTypes.func.isRequired,
   getPics: PropTypes.func.isRequired,
 };
