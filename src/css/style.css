@@ -242,7 +242,8 @@ h2 {
   display: none;
 }
 .section-cards--play {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .section-settings {

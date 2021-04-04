@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 
 import Card from "./Card";
 
-const CardContainer = ({ difficulty = 1 }) => {
-  const generateCards = (diff) => {
-    return Array.from(diff).map((card) => (
-      <Card size={1} key={`card-${card.toString()}`} />
+const CardContainer = ({ difficulty }) => {
+  const generateCards = () => {
+    return Array.from(Array(parseInt(difficulty, 10))).map((card) => (
+      <Card size={1} key={`card-${card}`} />
     ));
   };
 
-  return <>{generateCards(difficulty)}</>;
+  return <>{generateCards()}</>;
 };
 
 CardContainer.propTypes = {
