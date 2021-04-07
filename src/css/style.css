@@ -95,12 +95,12 @@ h2 {
 
 .card {
   perspective: 1000rem;
-  height: 20rem;
+  height: 30rem;
   width: 20rem;
   position: relative;
 }
 .card__side {
-  height: 20rem;
+  height: 100%;
   width: 100%;
   transition: all 0.8s ease;
   position: absolute;
@@ -113,13 +113,13 @@ h2 {
 }
 .card__side--back {
   transform: rotateY(180deg);
-  background-image: blue;
+  background-color: blue;
 }
-.card:hover .card__side--front {
-  transform: rotateY(-180deg);
+.card--active__side--front {
+  transform: rotateY(180deg);
 }
-.card:hover .card__side--back {
-  transform: rotateY(0);
+.card--active__side--back {
+  transform: rotateY(180deg);
 }
 
 .difficulty {
@@ -157,19 +157,8 @@ h2 {
 }
 
 .active {
-  display: inline-block;
-  transition: all 0.4s;
-  border: 0.2rem solid #a8d0e6;
   color: #374785;
   background-color: #a8d0e6;
-  font-size: 3rem;
-  border-radius: 10%;
-  margin-top: 1rem;
-  padding: 1rem;
-  outline: none;
-}
-.active:not(:last-child) {
-  margin-right: 3rem;
 }
 
 .theme-slider {
@@ -243,6 +232,8 @@ h2 {
 }
 .section-cards--play {
   display: flex;
+  height: 100%;
+  justify-content: space-around;
   align-items: center;
 }
 

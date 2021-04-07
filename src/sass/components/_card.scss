@@ -1,11 +1,11 @@
 .card {
   perspective: 1000rem;
-  height: 20rem;
+  height: 30rem;
   width: 20rem;
   position: relative;
 
   &__side {
-    height: 20rem;
+    height: 100%;
     width: 100%;
     transition: all 0.8s ease;
     position: absolute;
@@ -19,16 +19,18 @@
 
     &--back {
       transform: rotateY(180deg);
-      background-image: blue;
+      background-color: blue;
     }
   }
 
-  // what will happen to the front when the card is hovered
-  &:hover &__side--front {
-    transform: rotateY(-180deg);
-  }
-
-  &:hover &__side--back {
-    transform: rotateY(0);
+  &--active {
+    &__side {
+      &--front {
+        transform: rotateY(180deg);
+      }
+      &--back {
+        transform: rotateY(180deg);
+      }
+    }
   }
 }
