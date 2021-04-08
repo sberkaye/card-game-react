@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const DifficultyBox = ({ difficulty, changeDifficulty }) => {
   const handleClick = (e) => {
-    changeDifficulty(e.target.value);
+    changeDifficulty(parseInt(e.target.value, 10));
   };
 
   // need to use array mapping while rendering buttons

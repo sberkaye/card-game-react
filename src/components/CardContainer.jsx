@@ -19,7 +19,7 @@ const CardContainer = ({ difficulty }) => {
   // };
 
   const generateCards = () => {
-    return Array.from(Array(parseInt(difficulty, 10))).map((card) => (
+    return Array.from(Array(difficulty)).map((card) => (
       <Card key={`card-${card}`} />
     ));
   };

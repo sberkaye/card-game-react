@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 const Card = () => {
@@ -6,7 +6,10 @@ const Card = () => {
   const handleClick = () => {
     setActive(true);
   };
-  const className = `card ${active ? `card--active` : ``}`;
+  let className = `card ${active ? `card--active` : ``}`;
+  useEffect(() => {
+    className = `card ${active ? `card--active` : ``}`;
+  }, [active]);
   return (
     <button type="button" onClick={handleClick} className={className}>
       <div className="card__side card__side--front">SA</div>
