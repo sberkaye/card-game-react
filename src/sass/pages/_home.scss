@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   height: 90vh;
   animation: moveOutRight 1s forwards;
   animation-play-state: paused;
@@ -16,12 +15,21 @@
 
 .section-cards {
   display: none;
+  position: absolute;
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  transform: translateX(-200rem);
+  animation-play-state: paused;
+  transition: display 1s;
 
   &--play {
-    display: flex;
-    height: 100%;
+    display: inline-flex;
+    width: 100%;
     justify-content: space-around;
     align-items: center;
+    animation-play-state: running;
   }
 }
 

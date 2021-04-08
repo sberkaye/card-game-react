@@ -3,6 +3,7 @@
   height: 30rem;
   width: 20rem;
   position: relative;
+  outline: none;
 
   &__side {
     height: 100%;
@@ -24,6 +25,7 @@
   }
 
   &--active {
+    background-color: red;
     &__side {
       &--front {
         transform: rotateY(180deg);

@@ -1,28 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
-const Card = ({ size, active, changeActive }) => {
+const Card = () => {
+  const [active, setActive] = useState(false);
   const handleClick = () => {
-    changeActive(true);
-    console.log("clicked");
+    setActive(true);
   };
+  const className = `card ${active ? `card--active` : ``}`;
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      className={`card card-${size} ${active ? `card--active` : ``}`}
-    >
+    <button type="button" onClick={handleClick} className={className}>
       <div className="card__side card__side--front">SA</div>
       <div className="card__side card__side--back">AS</div>
     </button>
   );
-};
-
-Card.propTypes = {
-  size: PropTypes.number.isRequired,
-  active: PropTypes.bool.isRequired,
-  changeActive: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

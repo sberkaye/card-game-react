@@ -8,14 +8,14 @@
     transform: translateX(100rem);
   }
 }
-@keyframes hideScrollbar {
-  from, to {
-    overflow-x: hidden;
-  }
-}
-@keyframes fadeInLeft {
+@keyframes moveInLeft {
   0% {
     opacity: 0;
+    transform: translateX(-100rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
   }
 }
 *,
@@ -98,6 +98,7 @@ h2 {
   height: 30rem;
   width: 20rem;
   position: relative;
+  outline: none;
 }
 .card__side {
   height: 100%;
@@ -114,6 +115,9 @@ h2 {
 .card__side--back {
   transform: rotateY(180deg);
   background-color: blue;
+}
+.card--active {
+  background-color: red;
 }
 .card--active__side--front {
   transform: rotateY(180deg);
@@ -229,12 +233,21 @@ h2 {
 
 .section-cards {
   display: none;
+  position: absolute;
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  transform: translateX(-200rem);
+  animation-play-state: paused;
+  transition: display 1s;
 }
 .section-cards--play {
-  display: flex;
-  height: 100%;
+  display: inline-flex;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
+  animation-play-state: running;
 }
 
 .section-settings {
