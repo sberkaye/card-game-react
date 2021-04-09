@@ -99,10 +99,19 @@ h2 {
   width: 20rem;
   position: relative;
   outline: none;
+  border-radius: 1rem;
+  vertical-align: middle;
+  line-height: 35rem;
+  text-align: center;
+}
+.card__icon {
+  display: inline-block;
+  height: 10rem;
 }
 .card__side {
   height: 100%;
   width: 100%;
+  border-radius: 1rem;
   transition: all 0.8s ease;
   position: absolute;
   top: 0;
@@ -235,6 +244,8 @@ h2 {
   display: none;
   position: absolute;
   animation-name: moveInLeft;
+  height: 90vh;
+  width: 95vw;
   animation-duration: 1s;
   animation-delay: 1s;
   animation-fill-mode: forwards;
@@ -244,7 +255,6 @@ h2 {
 }
 .section-cards--play {
   display: inline-flex;
-  width: 100%;
   justify-content: space-around;
   align-items: center;
   animation-play-state: running;

@@ -17,6 +17,8 @@
   display: none;
   position: absolute;
   animation-name: moveInLeft;
+  height: 90vh;
+  width: 95vw;
   animation-duration: 1s;
   animation-delay: 1s;
   animation-fill-mode: forwards;
@@ -26,7 +28,6 @@
 
   &--play {
     display: inline-flex;
-    width: 100%;
     justify-content: space-around;
     align-items: center;
     animation-play-state: running;
