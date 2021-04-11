@@ -19,12 +19,13 @@ const Card = (props) => {
   const handleClick = () => {
     setActive(true);
   };
-  let className = `card ${active ? `card--active` : ``}`;
+  let className = `card ${active ? `card-active` : ``}`;
   useEffect(() => {
-    className = `card ${active ? `card--active` : ``}`;
+    className = `card ${active ? `card-active` : ``}`;
   }, [active]);
   return (
     <div aria-hidden onClick={handleClick} className={className}>
+      {console.log("className :>> ", className)}
       <div className="card__side card__side--front">
         <img src={logos[theme]} className="card__icon" alt={`${theme} icon`} />
       </div>
