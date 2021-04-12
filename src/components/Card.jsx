@@ -17,13 +17,20 @@ const logos = {
 const Card = (props) => {
   const { theme, pics, unique } = props;
   const [active, setActive] = useState(false);
+  const [className, setClassName] = useState(
+    `card ${active ? `card-active` : ``}`
+  );
   const handleClick = () => {
     setActive(true);
   };
-  let className = `card ${active ? `card-active` : ``}`;
   useEffect(() => {
-    className = `card ${active ? `card-active` : ``}`;
+    setClassName(`card ${active ? `card-active` : ``}`);
   }, [active]);
+  useEffect(() => {
+    setTimeout(() => {
+      setActive(true);
+    }, 5000);
+  }, []);
   return (
     <div aria-hidden onClick={handleClick} className={className}>
       <div className="card__side card__side--front">

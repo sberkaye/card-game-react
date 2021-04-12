@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 
 const CardContainer = ({ difficulty }) => {
-  const random = Math.floor(Math.random(difficulty + 2));
+  const random = Math.floor(Math.random() * (difficulty + 2));
 
   const generateCards = () => {
     return Array.from(Array(difficulty + 2)).map((card, index) => (
