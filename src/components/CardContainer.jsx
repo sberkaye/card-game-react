@@ -4,32 +4,15 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 
 const CardContainer = ({ difficulty }) => {
-  // const [active, setActive] = useState([
-  //   ...new Array(parseInt(difficulty, 10)).fill(false),
-  // ]);
-
-  // useEffect(() => {
-  //   setActive([...new Array(parseInt(difficulty, 10)).fill(false)]);
-  // }, [difficulty]);
-
-  // // function currying for setActive to make it easier to use
-  // // in the child Card component
-  // const changeActiveStatus = (index) => (status) => {
-  //   setActive([...active.slice(0, index), status, ...active.slice(index + 1)]);
-  // };
+  const random = Math.floor(Math.random(difficulty + 2));
 
   const generateCards = () => {
-    return Array.from(Array(difficulty + 2)).map((card) => (
-      <Card key={`card-${card}`} />
+    return Array.from(Array(difficulty + 2)).map((card, index) => (
+      <Card unique={index === random} key={`card-${card}`} />
     ));
   };
 
-  return (
-    <>
-      {generateCards()}
-      {console.log("render")}
-    </>
-  );
+  return <>{generateCards()}</>;
 };
 
 CardContainer.propTypes = {

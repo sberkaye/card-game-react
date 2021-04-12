@@ -1,7 +1,10 @@
 import { GET_PICTURES } from "../actions/types";
 
 const INITIAL_STATE = {
-  pics: [],
+  pics: {
+    unique: {},
+    regular: {},
+  },
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,7 +12,10 @@ export default (state = INITIAL_STATE, action) => {
     case GET_PICTURES:
       return {
         ...state,
-        pics: action.payload,
+        pics: {
+          unique: action.payload.unique,
+          regular: action.payload.regular,
+        },
       };
     default:
       return state;

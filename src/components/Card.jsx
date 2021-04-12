@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -14,7 +15,7 @@ const logos = {
 };
 
 const Card = (props) => {
-  const { theme } = props;
+  const { theme, pics, unique } = props;
   const [active, setActive] = useState(false);
   const handleClick = () => {
     setActive(true);
@@ -25,11 +26,18 @@ const Card = (props) => {
   }, [active]);
   return (
     <div aria-hidden onClick={handleClick} className={className}>
-      {console.log("className :>> ", className)}
       <div className="card__side card__side--front">
+        {Object.keys(pics.unique).length && (
+          <img
+            src={unique ? pics.unique.urls.small : pics.regular.urls.small}
+            className="card__picture"
+            alt={`${theme}`}
+          />
+        )}
+      </div>
+      <div className="card__side card__side--back">
         <img src={logos[theme]} className="card__icon" alt={`${theme} icon`} />
       </div>
-      <div className="card__side card__side--back">AS</div>
     </div>
   );
 };
@@ -43,6 +51,8 @@ const mapStateToProps = (state) => {
 
 Card.propTypes = {
   theme: PropTypes.string.isRequired,
+  pics: PropTypes.arrayOf(PropTypes.string).isRequired,
+  unique: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(Card);
