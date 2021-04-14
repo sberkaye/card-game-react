@@ -54,16 +54,16 @@
     }
 
     &--back {
-      transform: rotateY(180deg);
       background-color: $yellow-dark;
+      transform: rotateY(180deg);
     }
   }
 
-  &-active &__side--front {
-    transform: rotateY(-180deg);
-  }
+  // &-rotated &__side--front {
+  //   transform: rotateY(-180deg);
+  // }
 
-  &-active &__side--back {
-    transform: rotateY(0);
-  }
+  // &-rotated &__side--back {
+  //   transform: rotateY(0);
+  // }
 }
