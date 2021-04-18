@@ -2,21 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import picsActions from "../redux/actions/actionPics";
-import gameActions from "../redux/actions/actionGame";
 
 const { getPics } = picsActions;
-const { setStartedFlag } = gameActions;
 
 const StartButton = (props) => {
-  const { difficulty } = props;
+  const { difficulty, setStarted } = props;
 
   const handleClick = () => {
-    props.setAnimated(true);
     props.getPics();
     console.log("difficulty :>> ", difficulty);
-    setTimeout(() => {
-      props.setStartedFlag(true);
-    }, 4000);
+    setStarted(true);
   };
 
   return (
@@ -30,9 +25,9 @@ const StartButton = (props) => {
 
 StartButton.propTypes = {
   difficulty: PropTypes.number.isRequired,
-  setAnimated: PropTypes.func.isRequired,
   getPics: PropTypes.func.isRequired,
-  setStartedFlag: PropTypes.func.isRequired,
+  // setStartedFlag: PropTypes.func.isRequired,
+  setStarted: PropTypes.func.isRequired,
 };
 
-export default connect(null, { getPics, setStartedFlag })(StartButton);
+export default connect(null, { getPics })(StartButton);

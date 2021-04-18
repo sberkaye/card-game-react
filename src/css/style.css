@@ -244,34 +244,16 @@ h2 {
   flex-direction: column;
   justify-content: space-between;
   height: 90vh;
-  animation: moveOutRight 1s forwards;
-  animation-play-state: paused;
-  backface-visibility: hidden;
   position: relative;
 }
 
-.animated {
-  animation-play-state: running;
-}
-
 .section-cards {
-  display: none;
-  position: absolute;
-  animation-name: moveInLeft;
   height: 90vh;
   width: 95vw;
-  animation-duration: 1s;
-  animation-delay: 1s;
-  animation-fill-mode: forwards;
-  transform: translateX(-200rem);
-  animation-play-state: paused;
-  transition: display 1s;
-}
-.section-cards--play {
-  display: inline-flex;
+  position: absolute;
+  display: flex;
   justify-content: space-around;
   align-items: center;
-  animation-play-state: running;
 }
 
 .section-settings {

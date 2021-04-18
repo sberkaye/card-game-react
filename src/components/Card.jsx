@@ -16,11 +16,10 @@ const logos = {
 };
 
 const Card = (props) => {
-  const { theme, pics, unique, started } = props;
+  const { theme, pics, unique } = props;
   const [rotated, setRotated] = useState(false);
-  // const [selected, setSelected] = useState(false);
 
-  // --------------------  STYLES  -----------------------
+  // --------------------  ANIMATIONS  -----------------------
   const frontStyle = useSpring({
     transform: rotated ? "rotateY(-180deg)" : "",
   });
@@ -29,20 +28,17 @@ const Card = (props) => {
   });
   // ------------------------------------------------------
   const handleClick = () => {
-    setRotated(true);
+    setRotated(false);
   };
   useEffect(() => {
-    console.log("hellooooo");
-    console.log("started :>> ", started);
-    if (started) {
+    setTimeout(() => {
       setRotated(true);
-      console.log("frontStyle :>> ", frontStyle);
-      console.log("backStyle :>> ", backStyle);
-    }
-  }, [started]);
+      console.log("sa");
+    }, 5000);
+  }, []);
 
   return (
-    <div aria-hidden onClick={handleClick} className="card">
+    <animated.div aria-hidden onClick={handleClick} className="card">
       <animated.div className="card__side card__side--front" style={frontStyle}>
         {Object.keys(pics.unique).length && (
           <img
@@ -55,7 +51,7 @@ const Card = (props) => {
       <animated.div className="card__side card__side--back" style={backStyle}>
         <img src={logos[theme]} className="card__icon" alt={`${theme} icon`} />
       </animated.div>
-    </div>
+    </animated.div>
   );
 };
 
@@ -63,7 +59,6 @@ const mapStateToProps = (state) => {
   return {
     pics: state.pics.pics,
     theme: state.theme.selectedTheme,
-    started: state.game.started,
   };
 };
 
@@ -71,7 +66,6 @@ Card.propTypes = {
   theme: PropTypes.string.isRequired,
   pics: PropTypes.arrayOf(PropTypes.string).isRequired,
   unique: PropTypes.bool.isRequired,
-  started: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(Card);
