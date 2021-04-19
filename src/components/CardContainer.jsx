@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 
 import Card from "./Card";
 
 const CardContainer = ({ difficulty }) => {
-  const [rotated, setRotated] = useState([]);
-
-  const random = Math.floor(Math.random() * (difficulty + 2));
+  const [random, setRandom] = useState(0);
 
   useEffect(() => {
-    setRotated(Array.from(Array(difficulty + 2)).fill(false));
-    console.log("rotated :>> ", rotated);
+    setRandom(Math.floor(Math.random() * (difficulty + 2)));
   }, [difficulty]);
 
   const generateCards = () => {
     return Array.from(Array(difficulty + 2)).map((card, index) => (
-      <Card
-        rotated={rotated[index]}
-        unique={index === random}
-        key={`card-${card}`}
-      />
+      <Card unique={index === random} key={uuidv4()} />
     ));
   };
 

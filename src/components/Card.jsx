@@ -17,23 +17,33 @@ const logos = {
 
 const Card = (props) => {
   const { theme, pics, unique } = props;
+
   const [rotated, setRotated] = useState(false);
 
   // --------------------  ANIMATIONS  -----------------------
-  const frontStyle = useSpring({
-    transform: rotated ? "rotateY(-180deg)" : "",
-  });
-  const backStyle = useSpring({
-    transform: rotated ? "rotateY(0)" : "",
-  });
+  const [frontStyle, setFrontStyle] = useSpring(() => ({
+    transform: "",
+  }));
+  const [backStyle, setBackStyle] = useSpring(() => ({
+    transform: "",
+  }));
+
+  setFrontStyle({ transform: rotated ? "rotateY(-180deg)" : "" });
+  setBackStyle({ transform: rotated ? "rotateY(0)" : "" });
   // ------------------------------------------------------
   const handleClick = () => {
     setRotated(false);
+    if (unique) {
+      // show "correct" animation
+    } else {
+      // show "fail" animation
+    }
   };
+
   useEffect(() => {
     setTimeout(() => {
-      setRotated(true);
       console.log("sa");
+      setRotated(true);
     }, 5000);
   }, []);
 
