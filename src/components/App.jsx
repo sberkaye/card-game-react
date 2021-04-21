@@ -27,7 +27,7 @@ const App = () => {
   return (
     <>
       <animated.div style={containerStyle} className="section-cards">
-        <CardContainer difficulty={difficulty} />
+        <CardContainer difficulty={difficulty} started={started} />
       </animated.div>
       <animated.div style={mainStyle} className="section-main">
         <div className="section-text">

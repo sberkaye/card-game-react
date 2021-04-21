@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-indent */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
@@ -16,9 +16,10 @@ const logos = {
 };
 
 const Card = (props) => {
-  const { theme, pics, unique } = props;
+  const { theme, pics, unique, setCardRef, cardRefs } = props;
 
   const [rotated, setRotated] = useState(false);
+  const ref = useRef();
 
   // --------------------  ANIMATIONS  -----------------------
   const [frontStyle, setFrontStyle] = useSpring(() => ({
@@ -41,14 +42,19 @@ const Card = (props) => {
   };
 
   useEffect(() => {
+    setCardRef(ref);
     setTimeout(() => {
       console.log("sa");
       setRotated(true);
     }, 5000);
   }, []);
 
+  useEffect(() => {
+    console.log(`cardRefs from Card: `, cardRefs);
+  }, [cardRefs]);
+
   return (
-    <animated.div aria-hidden onClick={handleClick} className="card">
+    <animated.div aria-hidden onClick={handleClick} ref={ref} className="card">
       <animated.div className="card__side card__side--front" style={frontStyle}>
         {Object.keys(pics.unique).length && (
           <img
@@ -76,6 +82,16 @@ Card.propTypes = {
   theme: PropTypes.string.isRequired,
   pics: PropTypes.arrayOf(PropTypes.string).isRequired,
   unique: PropTypes.bool.isRequired,
+  setCardRef: PropTypes.func.isRequired,
+  cardRefs: PropTypes.arrayOf(
+    PropTypes.shape({
+      current: PropTypes.arrayOf(
+        PropTypes.shape({
+          current: PropTypes.element,
+        })
+      ),
+    })
+  ).isRequired,
 };
 
 export default connect(mapStateToProps)(Card);

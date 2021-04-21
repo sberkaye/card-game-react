@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_PICTURES:
+      console.log(`action.payload: `, action.payload);
       return {
         ...state,
         pics: {
