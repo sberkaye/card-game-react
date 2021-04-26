@@ -77,6 +77,7 @@ const StartButton = (props) => {
     cardsData.forEach((card, index) => {
       cardsData[index] = {
         theme,
+        index,
         unique: index === random,
         pic:
           index === random ? pics.unique.urls.small : pics.regular.urls.small,

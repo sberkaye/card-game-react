@@ -1,9 +1,13 @@
 /* eslint-disable no-return-assign */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useSprings, animated } from "react-spring";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
+
+import cardDataActions from "../redux/actions/actionCardData";
+
+const { setCardData } = cardDataActions;
 
 /**
  * A helper function to make using state setters for Array states easier to use
@@ -12,38 +16,37 @@ import { v4 as uuidv4 } from "uuid";
  * @param {*} val
  * @returns new array with the value inserted into the specified index
  */
-const insertIntoIndex = (arr, index, val) => {
-  return [...arr.slice(0, index), val, ...arr.slice(index + 1)];
-};
+// const insertIntoIndex = (arr, index, val) => {
+//   return [...arr.slice(0, index), val, ...arr.slice(index)];
+// };
 
 const CardContainer = (props) => {
-  const { difficulty, started, cards } = props;
-  const [rotated, setRotated] = useState(new Array(difficulty + 2).fill(false));
-  console.log(`cards`, cards);
+  const { started, cards } = props;
   const frontSprings = useSprings(
     cards.length,
-    cards.map((card, index) => ({
-      transform: rotated[index] ? "rotateY(-180deg)" : "",
+    cards.map((card) => ({
+      transform: card.rotated ? "rotateY(-180deg)" : "rotateY(0)",
     }))
   );
   const backSprings = useSprings(
     cards.length,
-    cards.map((card, index) => ({
-      transform: rotated[index] ? "rotateY(0)" : "",
+    cards.map((card) => ({
+      transform: card.rotated ? "rotateY(0)" : "rotateY(180deg)",
     }))
   );
 
   const handleClick = (index) => () => {
-    setRotated(insertIntoIndex(rotated, index, true));
+    const newCards = cards.map((card, cardIndex) =>
+      index === cardIndex ? { ...card, rotated: false } : { ...card }
+    );
+    props.setCardData(newCards);
   };
 
+  // rotate each card 5 seconds after the start
   useEffect(() => {
     setTimeout(() => {
-      setRotated((prev) =>
-        prev.map((rotation) => {
-          return !rotation;
-        })
-      );
+      const rotatedCards = cards.map((card) => ({ ...card, rotated: true }));
+      props.setCardData(rotatedCards);
     }, 5000);
   }, [started]);
 
@@ -65,7 +68,6 @@ const CardContainer = (props) => {
               className="card__picture"
               alt={`${card.theme}`}
             />
-            )
           </animated.div>
           <animated.div
             className="card__side card__side--back"
@@ -91,7 +93,7 @@ const mapStateToProps = (state) => {
 };
 
 CardContainer.propTypes = {
-  difficulty: PropTypes.number.isRequired,
+  // difficulty: PropTypes.number.isRequired,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
       theme: PropTypes.string,
@@ -102,6 +104,7 @@ CardContainer.propTypes = {
     })
   ).isRequired,
   started: PropTypes.bool.isRequired,
+  setCardData: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(CardContainer);
+export default connect(mapStateToProps, { setCardData })(CardContainer);
