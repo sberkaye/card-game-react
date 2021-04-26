@@ -1,9 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const DifficultyBox = ({ difficulty, changeDifficulty }) => {
+import difficultyAction from "../redux/actions/actionDifficulty";
+
+const { setDifficulty } = difficultyAction;
+
+const DifficultyBox = (props) => {
+  const { difficulty } = props;
   const handleClick = (e) => {
-    changeDifficulty(parseInt(e.target.value, 10));
+    props.setDifficulty(parseInt(e.target.value, 10));
   };
 
   // need to use array mapping while rendering buttons
@@ -35,7 +41,13 @@ const DifficultyBox = ({ difficulty, changeDifficulty }) => {
 
 DifficultyBox.propTypes = {
   difficulty: PropTypes.number.isRequired,
-  changeDifficulty: PropTypes.func.isRequired,
+  setDifficulty: PropTypes.func.isRequired,
 };
 
-export default DifficultyBox;
+const mapStateToProps = (state) => {
+  return {
+    difficulty: state.difficulty.difficulty,
+  };
+};
+
+export default connect(mapStateToProps, { setDifficulty })(DifficultyBox);

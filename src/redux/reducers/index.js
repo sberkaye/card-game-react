@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 
 import themeReducer from "./themeReducer";
-import picsReducer from "./picsReducer";
+import difficultyReducer from "./difficultyReducer";
+import cardDataReducer from "./cardDataReducer";
 
 export default combineReducers({
   theme: themeReducer,
-  pics: picsReducer,
+  difficulty: difficultyReducer,
+  cardData: cardDataReducer,
 });
