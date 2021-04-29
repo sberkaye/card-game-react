@@ -95,9 +95,8 @@ h2 {
 
 .card {
   perspective: 1000rem;
-  height: 30rem;
-  width: 20rem;
-  position: relative;
+  height: 50%;
+  position: absolute;
   outline: none;
   border-radius: 1rem;
   transition: all 0.2s;
@@ -249,10 +248,10 @@ h2 {
 
 .section-cards {
   height: 90vh;
-  width: 95vw;
-  position: absolute;
+  width: 100vw;
+  position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 

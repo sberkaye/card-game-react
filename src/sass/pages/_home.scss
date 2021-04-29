@@ -8,10 +8,10 @@
 
 .section-cards {
   height: 90vh;
-  width: 95vw;
-  position: absolute;
+  width: 100vw;
+  position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 

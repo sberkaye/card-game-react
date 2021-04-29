@@ -1,86 +1,82 @@
 /* eslint-disable no-return-assign */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useSprings, animated } from "react-spring";
+import { useTransition } from "react-spring";
 import PropTypes from "prop-types";
-import { v4 as uuidv4 } from "uuid";
+import { shuffle } from "lodash";
+import Card from "./Card";
 
 import cardDataActions from "../redux/actions/actionCardData";
 
 const { setCardData } = cardDataActions;
 
-/**
- * A helper function to make using state setters for Array states easier to use
- * @param {Array} arr
- * @param {Number} index
- * @param {*} val
- * @returns new array with the value inserted into the specified index
- */
-// const insertIntoIndex = (arr, index, val) => {
-//   return [...arr.slice(0, index), val, ...arr.slice(index)];
-// };
-
 const CardContainer = (props) => {
-  const { started, cards } = props;
-  const frontSprings = useSprings(
-    cards.length,
-    cards.map((card) => ({
-      transform: card.rotated ? "rotateY(-180deg)" : "rotateY(0)",
-    }))
-  );
-  const backSprings = useSprings(
-    cards.length,
-    cards.map((card) => ({
-      transform: card.rotated ? "rotateY(0)" : "rotateY(180deg)",
-    }))
-  );
+  const { started, cards, difficulty } = props;
+  const [count, setCount] = useState(0);
+  const [rotated, setRotated] = useState(new Array(difficulty + 2).fill(false));
 
-  const handleClick = (index) => () => {
-    const newCards = cards.map((card, cardIndex) =>
-      index === cardIndex ? { ...card, rotated: false } : { ...card }
-    );
-    props.setCardData(newCards);
+  const shuffleCards = (shuffleCount) => {
+    if (shuffleCount < difficulty) {
+      props.setCardData(shuffle(cards));
+    }
   };
 
-  // rotate each card 5 seconds after the start
-  useEffect(() => {
+  // rotate the card that is clicked after the click, and after a second
+  // rotate every other card
+  const handleClick = (index) => () => {
+    setRotated([...rotated.slice(0, index), true, ...rotated.slice(index)]);
     setTimeout(() => {
-      const rotatedCards = cards.map((card) => ({ ...card, rotated: true }));
-      props.setCardData(rotatedCards);
-    }, 5000);
+      setRotated((rot) => rot.fill(true));
+    }, 1000);
+  };
+
+  // transition object, use widths of the cards to determine their x positions
+  let width = 0;
+  const cardTransitions = useTransition(
+    cards.map((card, index) => {
+      width += card.cardWidth;
+      return {
+        ...card,
+        x:
+          200 / difficulty +
+          width -
+          card.cardWidth +
+          (index * 100) / (difficulty * 2),
+      };
+    }),
+    {
+      key: (card) => card.key,
+      from: { width: 0, opacity: 0 },
+      leave: { width: 0, opacity: 0 },
+      enter: ({ x, cardWidth }) => ({ x, width: cardWidth, opacity: 1 }),
+      update: ({ x, cardWidth }) => ({ x, width: cardWidth }),
+      delay: 500,
+    }
+  );
+
+  // rotate each card after the start and shuffle them
+  useEffect(() => {
+    /* eslint-disable no-plusplus */
+    setTimeout(() => {
+      setRotated((rot) => rot.fill(true));
+      shuffleCards(count);
+      setCount((c) => c + 1);
+    }, 1000);
   }, [started]);
 
   return (
     <>
-      {cards.map((card, cardIndex) => (
-        <animated.div
-          aria-hidden
-          onClick={handleClick(cardIndex)}
-          className="card"
-          key={uuidv4()}
-        >
-          <animated.div
-            className="card__side card__side--front"
-            style={frontSprings[cardIndex]}
-          >
-            <img
-              src={card.pic}
-              className="card__picture"
-              alt={`${card.theme}`}
-            />
-          </animated.div>
-          <animated.div
-            className="card__side card__side--back"
-            style={backSprings[cardIndex]}
-          >
-            <img
-              src={card.themePic}
-              className="card__icon"
-              alt={`${card.theme} icon`}
-            />
-          </animated.div>
-        </animated.div>
-      ))}
+      {cardTransitions((style, card, t, index) => {
+        return (
+          <Card
+            style={style}
+            data={card}
+            length={cards.length}
+            handleClick={handleClick(index)}
+            rotated={rotated[index]}
+          />
+        );
+      })}
     </>
   );
 };
@@ -93,14 +89,13 @@ const mapStateToProps = (state) => {
 };
 
 CardContainer.propTypes = {
-  // difficulty: PropTypes.number.isRequired,
+  difficulty: PropTypes.number.isRequired,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
       theme: PropTypes.string,
       unique: PropTypes.bool,
       pic: PropTypes.string,
       themePic: PropTypes.string,
-      rotated: PropTypes.bool,
     })
   ).isRequired,
   started: PropTypes.bool.isRequired,
@@ -108,3 +103,36 @@ CardContainer.propTypes = {
 };
 
 export default connect(mapStateToProps, { setCardData })(CardContainer);
+
+/*
+
+<animated.div
+          onClick={handleClick(card.index)}
+          className="card"
+          style={{ zIndex: cards.length - card.index, ...style }}
+        >
+          <animated.div className="card__cell">
+            <animated.div
+              className="card__side card__side--front"
+              style={frontSprings[card.index]}
+            >
+              <img
+                src={card.pic}
+                className="card__picture"
+                alt={`${card.theme}`}
+              />
+            </animated.div>
+            <animated.div
+              className="card__side card__side--back"
+              style={backSprings[card.index]}
+            >
+              <img
+                src={card.themePic}
+                className="card__icon"
+                alt={`${card.theme} icon`}
+              />
+            </animated.div>
+          </animated.div>
+        </animated.div>
+
+*/

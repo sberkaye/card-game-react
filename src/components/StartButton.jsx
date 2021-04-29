@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import cardDataActions from "../redux/actions/actionCardData";
 import unsplash from "../apis/unsplash";
@@ -11,6 +12,8 @@ import sports from "../img/sports.svg";
 const { setCardData } = cardDataActions;
 
 const themePics = { animals, flowers, cars, sports };
+
+const cardWidths = [200, 200, 200, 200];
 
 /**
  * get a number of random items form an array
@@ -76,13 +79,14 @@ const StartButton = (props) => {
     const cardsData = new Array(difficulty + 2).fill({});
     cardsData.forEach((card, index) => {
       cardsData[index] = {
+        key: uuidv4(),
         theme,
         index,
         unique: index === random,
         pic:
           index === random ? pics.unique.urls.small : pics.regular.urls.small,
         themePic: themePics[theme],
-        rotated: false,
+        cardWidth: cardWidths[difficulty - 1],
       };
     });
     console.log(`cardsData`, cardsData);
