@@ -157,6 +157,18 @@ h2 {
   transform: rotate(0);
 }
 
+.result-text {
+  font-size: 30rem;
+  z-index: 99;
+  font-weight: 700;
+}
+.result-text--success {
+  color: #85ffc7;
+}
+.result-text--fail {
+  color: #f76c6c;
+}
+
 .difficulty {
   display: inline-block;
   text-align: center;

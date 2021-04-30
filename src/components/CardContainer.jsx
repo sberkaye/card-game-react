@@ -1,18 +1,21 @@
 /* eslint-disable no-return-assign */
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useTransition } from "react-spring";
+import { animated, useTransition, useChain, useSpringRef } from "react-spring";
 import PropTypes from "prop-types";
 import { shuffle } from "lodash";
 import Card from "./Card";
 
-import cardDataActions from "../redux/actions/actionCardData";
+// import cardDataActions from "../redux/actions/actionCardData";
 
-const { setCardData } = cardDataActions;
+// const { setCardData } = cardDataActions;
 
 const CardContainer = (props) => {
   const { started, cards, difficulty, setStarted } = props;
   const [finished, setFinished] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [ownCards, setCards] = useState(cards);
   // const [count, setCount] = useState(0);
 
   // const shuffleCards = (shuffleCount, newCards) => {
@@ -24,8 +27,8 @@ const CardContainer = (props) => {
   // rotate the card that is clicked after the click, and after a second
   // rotate every other card
   const handleClick = (index) => () => {
-    props.setCardData(
-      cards.map((card, cardIndex) => {
+    setCards(
+      ownCards.map((card, cardIndex) => {
         if (index === cardIndex) {
           return {
             ...card,
@@ -36,15 +39,33 @@ const CardContainer = (props) => {
       })
     );
     setTimeout(() => {
-      props.setCardData(cards.map((card) => ({ ...card, rotated: false })));
+      setCards(ownCards.map((card) => ({ ...card, rotated: false })));
     }, 1000);
+    if (ownCards[index].unique) {
+      setSuccess("success");
+      console.log("success");
+    } else {
+      setSuccess("fail");
+      console.log("fail");
+    }
     setTimeout(() => setStarted(false), 2000);
   };
 
+  const resultRef = useSpringRef();
+  const resultTransition = useTransition(success, {
+    from: { opacity: 0, y: 1000, transform: "scale(0)" },
+    enter: { opacity: 1, y: 0, transform: "scale(1)" },
+    leave: { opacity: 0 },
+    config: { duration: 1000 },
+    delay: 1000,
+    ref: resultRef,
+  });
+
   // transition object, use widths of the cards to determine their x positions
+  const cardsRef = useSpringRef();
   let width = 0;
   const cardTransitions = useTransition(
-    cards.map((card, index) => {
+    ownCards.map((card, index) => {
       width += card.cardWidth;
       return {
         ...card,
@@ -61,13 +82,15 @@ const CardContainer = (props) => {
       leave: { width: 0, opacity: 0 },
       enter: ({ x, cardWidth }) => ({ x, width: cardWidth, opacity: 1 }),
       update: ({ x, cardWidth }) => ({ x, width: cardWidth }),
+      ref: cardsRef,
     }
   );
 
+  useChain([cardsRef, resultRef], [0, difficulty + 7]);
   // rotate each card after the start and shuffle them
   useEffect(() => {
     setTimeout(() => {
-      props.setCardData(cards.map((card) => ({ ...card, rotated: true })));
+      setCards(ownCards.map((card) => ({ ...card, rotated: true })));
     }, 2000);
     // setTimeout(() => {
     //   shuffleCards(
@@ -78,9 +101,7 @@ const CardContainer = (props) => {
     // setCount((c) => c + 1);
     for (let i = 0; i < difficulty + 1; i += 1) {
       setTimeout(() => {
-        props.setCardData(
-          shuffle(cards.map((card) => ({ ...card, rotated: true })))
-        );
+        setCards(shuffle(ownCards.map((card) => ({ ...card, rotated: true }))));
       }, (i + 3) * 1000);
     }
     setTimeout(() => setFinished(true), (difficulty + 4) * 1000);
@@ -100,6 +121,27 @@ const CardContainer = (props) => {
           />
         );
       })}
+      {resultTransition((style, status) =>
+        status.length ? (
+          status === "success" ? (
+            <animated.div
+              style={style}
+              className="result-text result-text--success"
+            >
+              SUCCESS
+            </animated.div>
+          ) : (
+            <animated.div
+              style={style}
+              className="result-text result-text--fail"
+            >
+              FAIL
+            </animated.div>
+          )
+        ) : (
+          <></>
+        )
+      )}
     </>
   );
 };
@@ -123,10 +165,10 @@ CardContainer.propTypes = {
   ).isRequired,
   started: PropTypes.bool.isRequired,
   setStarted: PropTypes.func.isRequired,
-  setCardData: PropTypes.func.isRequired,
+  // setCardData: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { setCardData })(CardContainer);
+export default connect(mapStateToProps)(CardContainer);
 
 /*
 

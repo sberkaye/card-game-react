@@ -1,0 +1,11 @@
+.result-text {
+  font-size: 30rem;
+  z-index: 99;
+  font-weight: 700;
+  &--success {
+    color: $green-light;
+  }
+  &--fail {
+    color: $red-light;
+  }
+}
