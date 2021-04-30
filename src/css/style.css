@@ -103,6 +103,9 @@ h2 {
   text-align: center;
   box-shadow: 0.2rem 0.2rem 1rem #333;
 }
+.card--not-finished {
+  pointer-events: none;
+}
 .card:hover {
   transform: scale(1.03);
   cursor: pointer;
@@ -143,9 +146,15 @@ h2 {
 .card__side--front {
   background-color: #f3de8a;
 }
+.card__side--front--rotated {
+  transform: rotateY(-180deg);
+}
 .card__side--back {
   background-color: #f3de8a;
   transform: rotateY(180deg);
+}
+.card__side--back--rotated {
+  transform: rotate(0);
 }
 
 .difficulty {
@@ -247,7 +256,7 @@ h2 {
 }
 
 .section-cards {
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
   position: relative;
   display: flex;

@@ -87,6 +87,7 @@ const StartButton = (props) => {
           index === random ? pics.unique.urls.small : pics.regular.urls.small,
         themePic: themePics[theme],
         cardWidth: cardWidths[difficulty - 1],
+        rotated: false,
       };
     });
     console.log(`cardsData`, cardsData);

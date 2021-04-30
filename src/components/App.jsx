@@ -19,7 +19,7 @@ const App = () => {
       {transition((style, data) =>
         data ? (
           <animated.div style={style} className="section-cards">
-            <CardContainer started={started} />
+            <CardContainer started={started} setStarted={setStarted} />
           </animated.div>
         ) : (
           <animated.div style={style} className="section-main">

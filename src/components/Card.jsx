@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { animated } from "react-spring";
 
 const Card = (props) => {
-  const { style, data, length, rotated, handleClick } = props;
+  const { style, data, length, handleClick, rotated, finished } = props;
 
   // --------------------  ANIMATIONS  -----------------------
   // const [frontStyle, setFrontStyle] = useSpring(() => ({
@@ -21,7 +21,7 @@ const Card = (props) => {
 
   return (
     <animated.div
-      className="card"
+      className={`card ${finished ? `` : `card--not-finished`}`}
       onClick={handleClick}
       style={{ zIndex: length - data.index, ...style }}
     >
@@ -51,6 +51,7 @@ Card.propTypes = {
   handleClick: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
   rotated: PropTypes.bool,
+  finished: PropTypes.bool.isRequired,
   data: PropTypes.shape({
     index: PropTypes.number,
     pic: PropTypes.string,

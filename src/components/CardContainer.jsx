@@ -11,23 +11,34 @@ import cardDataActions from "../redux/actions/actionCardData";
 const { setCardData } = cardDataActions;
 
 const CardContainer = (props) => {
-  const { started, cards, difficulty } = props;
-  const [count, setCount] = useState(0);
-  const [rotated, setRotated] = useState(new Array(difficulty + 2).fill(false));
+  const { started, cards, difficulty, setStarted } = props;
+  const [finished, setFinished] = useState(false);
+  // const [count, setCount] = useState(0);
 
-  const shuffleCards = (shuffleCount) => {
-    if (shuffleCount < difficulty) {
-      props.setCardData(shuffle(cards));
-    }
-  };
+  // const shuffleCards = (shuffleCount, newCards) => {
+  //   if (shuffleCount < difficulty) {
+  //     props.setCardData(shuffle(newCards));
+  //   }
+  // };
 
   // rotate the card that is clicked after the click, and after a second
   // rotate every other card
   const handleClick = (index) => () => {
-    setRotated([...rotated.slice(0, index), true, ...rotated.slice(index)]);
+    props.setCardData(
+      cards.map((card, cardIndex) => {
+        if (index === cardIndex) {
+          return {
+            ...card,
+            rotated: false,
+          };
+        }
+        return card;
+      })
+    );
     setTimeout(() => {
-      setRotated((rot) => rot.fill(true));
+      props.setCardData(cards.map((card) => ({ ...card, rotated: false })));
     }, 1000);
+    setTimeout(() => setStarted(false), 2000);
   };
 
   // transition object, use widths of the cards to determine their x positions
@@ -50,18 +61,29 @@ const CardContainer = (props) => {
       leave: { width: 0, opacity: 0 },
       enter: ({ x, cardWidth }) => ({ x, width: cardWidth, opacity: 1 }),
       update: ({ x, cardWidth }) => ({ x, width: cardWidth }),
-      delay: 500,
     }
   );
 
   // rotate each card after the start and shuffle them
   useEffect(() => {
-    /* eslint-disable no-plusplus */
     setTimeout(() => {
-      setRotated((rot) => rot.fill(true));
-      shuffleCards(count);
-      setCount((c) => c + 1);
-    }, 1000);
+      props.setCardData(cards.map((card) => ({ ...card, rotated: true })));
+    }, 2000);
+    // setTimeout(() => {
+    //   shuffleCards(
+    //     count,
+    //     cards.map((card) => ({ ...card, rotated: true }))
+    //   );
+    // }, 3000);
+    // setCount((c) => c + 1);
+    for (let i = 0; i < difficulty + 1; i += 1) {
+      setTimeout(() => {
+        props.setCardData(
+          shuffle(cards.map((card) => ({ ...card, rotated: true })))
+        );
+      }, (i + 3) * 1000);
+    }
+    setTimeout(() => setFinished(true), (difficulty + 4) * 1000);
   }, [started]);
 
   return (
@@ -73,7 +95,8 @@ const CardContainer = (props) => {
             data={card}
             length={cards.length}
             handleClick={handleClick(index)}
-            rotated={rotated[index]}
+            rotated={card.rotated}
+            finished={finished}
           />
         );
       })}
@@ -99,6 +122,7 @@ CardContainer.propTypes = {
     })
   ).isRequired,
   started: PropTypes.bool.isRequired,
+  setStarted: PropTypes.func.isRequired,
   setCardData: PropTypes.func.isRequired,
 };
 

@@ -8,6 +8,10 @@
   text-align: center;
   box-shadow: 0.2rem 0.2rem 1rem #333;
 
+  &--not-finished {
+    pointer-events: none;
+  }
+
   &:hover {
     transform: scale(1.03);
     cursor: pointer;
@@ -50,11 +54,17 @@
 
     &--front {
       background-color: $yellow-dark;
+      &--rotated {
+        transform: rotateY(-180deg);
+      }
     }
 
     &--back {
       background-color: $yellow-dark;
       transform: rotateY(180deg);
+      &--rotated {
+        transform: rotate(0);
+      }
     }
   }
 
