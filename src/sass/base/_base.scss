@@ -9,6 +9,20 @@
 html {
   // this defines what 1rem is equal to (62.5% of default 16px = 10px, so 1rem = 10px)
   font-size: 62.5%;
+
+  @include respond(m) {
+    font-size: 50%; // 1rem = 8px
+  }
+  @include respond(s) {
+    font-size: 43.75%; // 1rem = 7px
+  }
+  @include respond(xs) {
+    font-size: 37.5%; // 1rem = 6px
+  }
+
+  @include respond(xxs) {
+    font-size: 31.25%; // 1rem = 5px
+  }
 }
 
 body {

@@ -1,3 +1,13 @@
+/*
+ * Mixin to help making the website responsive depending on
+ * the breakpoint provided.
+ *
+ * breakpoints:
+ * 390px(24.375em) -> [xxs]
+ * 612px(38.25em) -> [xs]
+ * 730px(45.625em) -> [s]
+ * 856px(53.5em) -> [m]
+ */
 @keyframes moveOutRight {
   0% {
     opacity: 1;
@@ -29,6 +39,26 @@
 html {
   font-size: 62.5%;
 }
+@media (max-width: 53.5em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media (max-width: 45.625em) {
+  html {
+    font-size: 43.75%;
+  }
+}
+@media (max-width: 38.25em) {
+  html {
+    font-size: 37.5%;
+  }
+}
+@media (max-width: 24.375em) {
+  html {
+    font-size: 31.25%;
+  }
+}
 
 body {
   box-sizing: border-box;
@@ -41,7 +71,6 @@ body {
 body {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  font-size: 1.6rem;
 }
 
 h1 {
@@ -174,7 +203,12 @@ h2 {
   display: inline-block;
   text-align: center;
   font-size: 3rem;
-  height: 100%;
+}
+@media (max-width: 45.625em) {
+  .difficulty {
+    margin-top: 2rem;
+    display: block;
+  }
 }
 .difficulty__box {
   margin: 2rem;
@@ -212,6 +246,11 @@ h2 {
 .theme-slider {
   display: inline-block;
   text-align: center;
+}
+@media (max-width: 45.625em) {
+  .theme-slider {
+    display: block;
+  }
 }
 .theme-slider__text {
   font-size: 3rem;
@@ -267,6 +306,13 @@ h2 {
   height: 90vh;
   position: relative;
 }
+@media (max-width: 45.625em) {
+  .section-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
 
 .section-cards {
   height: 100vh;
@@ -281,6 +327,11 @@ h2 {
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
+}
+@media (max-width: 45.625em) {
+  .section-settings {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

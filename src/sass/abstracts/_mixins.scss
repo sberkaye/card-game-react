@@ -1,0 +1,33 @@
+/*
+ * Mixin to help making the website responsive depending on
+ * the breakpoint provided.
+ *
+ * breakpoints:
+ * 390px(24.375em) -> [xxs]
+ * 612px(38.25em) -> [xs]
+ * 730px(45.625em) -> [s]
+ * 856px(53.5em) -> [m]
+ */
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == m {
+    @media (max-width: 53.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == s {
+    @media (max-width: 45.625em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xs {
+    @media (max-width: 38.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == xxs {
+    @media (max-width: 24.375em) {
+      @content;
+    }
+  }
+}
