@@ -158,9 +158,10 @@ h2 {
 }
 
 .result-text {
-  font-size: 30rem;
+  font-size: 28rem;
   z-index: 99;
   font-weight: 700;
+  margin: 0 auto;
 }
 .result-text--success {
   color: #85ffc7;

@@ -7,22 +7,11 @@ import PropTypes from "prop-types";
 import { shuffle } from "lodash";
 import Card from "./Card";
 
-// import cardDataActions from "../redux/actions/actionCardData";
-
-// const { setCardData } = cardDataActions;
-
 const CardContainer = (props) => {
   const { started, cards, difficulty, setStarted } = props;
   const [finished, setFinished] = useState(false);
   const [success, setSuccess] = useState("");
   const [ownCards, setCards] = useState(cards);
-  // const [count, setCount] = useState(0);
-
-  // const shuffleCards = (shuffleCount, newCards) => {
-  //   if (shuffleCount < difficulty) {
-  //     props.setCardData(shuffle(newCards));
-  //   }
-  // };
 
   // rotate the card that is clicked after the click, and after a second
   // rotate every other card
@@ -92,13 +81,6 @@ const CardContainer = (props) => {
     setTimeout(() => {
       setCards(ownCards.map((card) => ({ ...card, rotated: true })));
     }, 2000);
-    // setTimeout(() => {
-    //   shuffleCards(
-    //     count,
-    //     cards.map((card) => ({ ...card, rotated: true }))
-    //   );
-    // }, 3000);
-    // setCount((c) => c + 1);
     for (let i = 0; i < difficulty + 1; i += 1) {
       setTimeout(() => {
         setCards(shuffle(ownCards.map((card) => ({ ...card, rotated: true }))));
@@ -165,40 +147,6 @@ CardContainer.propTypes = {
   ).isRequired,
   started: PropTypes.bool.isRequired,
   setStarted: PropTypes.func.isRequired,
-  // setCardData: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(CardContainer);
-
-/*
-
-<animated.div
-          onClick={handleClick(card.index)}
-          className="card"
-          style={{ zIndex: cards.length - card.index, ...style }}
-        >
-          <animated.div className="card__cell">
-            <animated.div
-              className="card__side card__side--front"
-              style={frontSprings[card.index]}
-            >
-              <img
-                src={card.pic}
-                className="card__picture"
-                alt={`${card.theme}`}
-              />
-            </animated.div>
-            <animated.div
-              className="card__side card__side--back"
-              style={backSprings[card.index]}
-            >
-              <img
-                src={card.themePic}
-                className="card__icon"
-                alt={`${card.theme} icon`}
-              />
-            </animated.div>
-          </animated.div>
-        </animated.div>
-
-*/

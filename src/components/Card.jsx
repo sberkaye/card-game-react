@@ -6,19 +6,6 @@ import { animated } from "react-spring";
 const Card = (props) => {
   const { style, data, length, handleClick, rotated, finished } = props;
 
-  // --------------------  ANIMATIONS  -----------------------
-  // const [frontStyle, setFrontStyle] = useSpring(() => ({
-  //   transform: "",
-  // }));
-  // const [backStyle, setBackStyle] = useSpring(() => ({
-  //   transform: "",
-  // }));
-
-  // setFrontStyle.start({ transform: rotated ? "rotateY(-180deg)" : "" });
-  // setBackStyle.start({ transform: rotated ? "rotate(0)" : "" });
-
-  // ------------------------------------------------------
-
   return (
     <animated.div
       className={`card ${finished ? `` : `card--not-finished`}`}
