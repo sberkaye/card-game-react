@@ -18,9 +18,14 @@ const App = () => {
     <>
       {transition((style, data) =>
         data ? (
-          <animated.div style={style} className="section-cards">
-            <CardContainer started={started} setStarted={setStarted} />
-          </animated.div>
+          <>
+            <animated.div style={style} className="section-cards">
+              <CardContainer started={started} setStarted={setStarted} />
+            </animated.div>
+            <div className="attribution">
+              Icons made by Freepik from www.flaticon.com
+            </div>
+          </>
         ) : (
           <animated.div style={style} className="section-main">
             <div className="section-text">
