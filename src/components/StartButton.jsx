@@ -73,9 +73,7 @@ const StartButton = (props) => {
   const handleClick = async () => {
     const pics = await getPictures();
     setRandom(Math.floor(Math.random() * (difficulty + 2)));
-    console.log("difficulty :>> ", difficulty);
 
-    console.log(`pics`, pics);
     const cardsData = new Array(difficulty + 2).fill({});
     cardsData.forEach((card, index) => {
       cardsData[index] = {
@@ -90,7 +88,6 @@ const StartButton = (props) => {
         rotated: false,
       };
     });
-    console.log(`cardsData`, cardsData);
     props.setCardData(cardsData);
     setStarted(true);
   };

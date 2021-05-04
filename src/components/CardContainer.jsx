@@ -32,10 +32,8 @@ const CardContainer = (props) => {
     }, 1000);
     if (ownCards[index].unique) {
       setSuccess("success");
-      console.log("success");
     } else {
       setSuccess("fail");
-      console.log("fail");
     }
     setTimeout(() => setStarted(false), 2000);
   };
